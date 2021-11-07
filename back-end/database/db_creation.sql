@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema supermarket
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `supermarket` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `supermarket` CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `supermarket` ;
 
 -- -----------------------------------------------------
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `supermarket`.`categories` (
   `category_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `supermarket`.`products` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -64,11 +64,11 @@ CREATE TABLE IF NOT EXISTS `supermarket`.`users` (
   `firstname` VARCHAR(45) NOT NULL,
   `lastnamep` VARCHAR(45) NOT NULL,
   `lastnamem` VARCHAR(45) NULL DEFAULT NULL,
-  `creation_date` DATE NOT NULL DEFAULT '0000-00-00',
+  `creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CHARACTER SET utf8 
+COLLATE utf8_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
