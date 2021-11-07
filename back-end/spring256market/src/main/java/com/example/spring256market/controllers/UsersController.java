@@ -7,5 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api") // handle only /api requests
 
 public class UsersController {
+    // TODO implement Interceptor method here or on services package
 
 }

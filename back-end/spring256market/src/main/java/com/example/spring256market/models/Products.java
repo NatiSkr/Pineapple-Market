@@ -32,7 +32,7 @@ public class Products {
     private double productUnitPrice;
 
     @Column(name = "Preview", nullable = true, unique = false)
-    private Blob product_picture;
+    private Blob productPicture;
 
     @ManyToOne(fetch = FetchType.EAGER) // exception to lazy loading
     @Column(name = "Category Id", nullable = false, unique = false)

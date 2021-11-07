@@ -7,6 +7,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema supermarket
 -- -----------------------------------------------------
@@ -14,7 +19,18 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema supermarket
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `supermarket` CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE SCHEMA IF NOT EXISTS `supermarket` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`orders`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`orders` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `employeeId` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 USE `supermarket` ;
 
 -- -----------------------------------------------------
@@ -22,11 +38,10 @@ USE `supermarket` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `supermarket`.`categories` (
   `id` INT NOT NULL,
-  `category_name` VARCHAR(45) NOT NULL,
+  `categoryName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-CHARACTER SET utf8
-COLLATE utf8_general_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -34,22 +49,21 @@ COLLATE utf8_general_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `supermarket`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `product_name` VARCHAR(100) NOT NULL,
-  `product_description` VARCHAR(255) NOT NULL,
-  `product_quantity` INT NOT NULL,
-  `product_unit_price` VARCHAR(45) NOT NULL,
-  `product_picture` BLOB NULL DEFAULT NULL,
-  `categories_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `categories_id`),
-  INDEX `fk_products_categories_idx` (`categories_id` ASC) VISIBLE,
+  `productName` VARCHAR(100) NOT NULL,
+  `productDescription` VARCHAR(255) NOT NULL,
+  `productQuantity` INT NOT NULL,
+  `productUnitPrice` VARCHAR(45) NOT NULL,
+  `productPicture` BLOB NULL DEFAULT NULL,
+  `categoriesId` INT NOT NULL,
+  PRIMARY KEY (`id`, `categoriesId`),
+  INDEX `fk_products_categories_idx` (`categoriesId` ASC) VISIBLE,
   CONSTRAINT `fk_products_categories`
-    FOREIGN KEY (`categories_id`)
+    FOREIGN KEY (`categoriesId`)
     REFERENCES `supermarket`.`categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-CHARACTER SET utf8
-COLLATE utf8_general_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -57,18 +71,17 @@ COLLATE utf8_general_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `supermarket`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `is_admin` TINYINT(1) NOT NULL DEFAULT '0',
-  `username` VARCHAR(20) NOT NULL,
+  `isAdmin` TINYINT(1) NOT NULL DEFAULT '0',
+  `userName` VARCHAR(20) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-  `firstname` VARCHAR(45) NOT NULL,
-  `lastnamep` VARCHAR(45) NOT NULL,
-  `lastnamem` VARCHAR(45) NULL DEFAULT NULL,
-  `creation_date` TIMESTAMP NOT NULL DEFAULT '0000-00-00',
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastNameP` VARCHAR(45) NOT NULL,
+  `lastNameM` VARCHAR(45) NULL DEFAULT NULL,
+  `creationDate` DATE NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-CHARACTER SET utf8 
-COLLATE utf8_general_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

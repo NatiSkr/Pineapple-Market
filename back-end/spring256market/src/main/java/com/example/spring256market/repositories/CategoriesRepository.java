@@ -1,5 +1,7 @@
 package com.example.spring256market.repositories;
 
-public class CategoriesRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoriesRepository extends JpaRepository {
 
 }
