@@ -8,4 +8,5 @@ public interface ProductsRepository extends JpaRepository<Products, Integer> {
     // Queries referencing Products model
     public Products findByProductName(String productName);
 
+    public Products findByCategoryName(String Categories_id);
 }
