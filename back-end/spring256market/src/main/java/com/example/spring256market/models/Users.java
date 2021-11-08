@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +41,7 @@ public class Users {
     @Column(name = "Maternal last name", nullable = true)
     private String lastNameM;
 
+    @Column(name = "Creation date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date creationDate;
 

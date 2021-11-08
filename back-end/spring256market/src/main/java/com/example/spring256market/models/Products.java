@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "products")
+@Table(name = "Products")
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,26 +36,23 @@ public class Products {
 
     @ManyToOne(fetch = FetchType.EAGER) // exception to lazy loading
     @Column(name = "Category Id", nullable = false, unique = false)
-    private int categoriesId;
+    private int Categories_id;
 
     public Products() {
     }
     // Empty constructor
 
     public Products(int id, String productName, String productDescription, int productQuantity, double productUnitPrice,
-            Blob product_picture, int categoriesId) {
+            Blob productPicture, int categories_id) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
-        this.product_picture = product_picture;
-        this.categoriesId = categoriesId;
+        this.productPicture = productPicture;
+        this.Categories_id = categories_id;
     }
 
-    /*
-     * Getters and Setters
-     */
     public int getId() {
         return this.id;
     }
@@ -96,20 +93,20 @@ public class Products {
         this.productUnitPrice = productUnitPrice;
     }
 
-    public Blob getProduct_picture() {
-        return this.product_picture;
+    public Blob getProductPicture() {
+        return this.productPicture;
     }
 
-    public void setProduct_picture(Blob product_picture) {
-        this.product_picture = product_picture;
+    public void setProductPicture(Blob productPicture) {
+        this.productPicture = productPicture;
     }
 
-    public int getCategoriesId() {
-        return this.categoriesId;
+    public int getCategories_id() {
+        return this.Categories_id;
     }
 
-    public void setCategoriesId(int categoriesId) {
-        this.categoriesId = categoriesId;
+    public void setCategories_id(int Categories_id) {
+        this.Categories_id = Categories_id;
     }
 
 }

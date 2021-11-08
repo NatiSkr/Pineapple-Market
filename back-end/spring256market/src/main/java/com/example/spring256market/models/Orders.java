@@ -1,34 +1,32 @@
 package com.example.spring256market.models;
 
-import java.sql.Blob;
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "order")
+@Table(name = "Orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Order Id", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "Employee Id", nullable = false, unique = false)
-    private int employeeId;
+    @ManyToOne(fetch = FetchType.EAGER) // exception to lazy loading
+    @Column(name = "User Id", nullable = false, unique = false)
+    private int Users_id;
 
     public Orders() {
     }
 
-    public Orders(int id, int employeeId) {
+    public Orders(int id, int Users_id) {
         this.id = id;
-        this.employeeId = employeeId;
+        this.Users_id = Users_id;
     }
 
     public int getId() {
@@ -39,12 +37,12 @@ public class Orders {
         this.id = id;
     }
 
-    public int getEmployeeId() {
-        return this.employeeId;
+    public int getUsers_id() {
+        return this.Users_id;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setUsers_id(int Users_id) {
+        this.Users_id = Users_id;
     }
 
 }
