@@ -1,9 +1,9 @@
-package com.example.spring256market.controller;
+package com.project.marketapi.controller;
 
 import java.util.List;
 
-import com.example.spring256market.model.Users;
-import com.example.spring256market.repository.UsersRepository;
+import com.project.marketapi.model.Users;
+import com.project.marketapi.repository.UsersRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
