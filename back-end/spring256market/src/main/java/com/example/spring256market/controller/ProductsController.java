@@ -1,4 +1,4 @@
-package com.example.spring256market.controllers;
+package com.example.spring256market.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

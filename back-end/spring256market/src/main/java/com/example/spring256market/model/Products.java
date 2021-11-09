@@ -1,5 +1,6 @@
-package com.example.spring256market.models;
+package com.example.spring256market.model;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Column;
@@ -8,49 +9,53 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Products")
-public class Products {
+@Table(name = "products")
+// Allow serialization
+public class Products implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Product Id", nullable = false, unique = true)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "Product Name", nullable = false, unique = true)
+    @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "Description", nullable = false, unique = true)
+    @Column(name = "product_description")
     private String productDescription;
 
-    @Column(name = "Quantity", nullable = false, unique = false)
+    @Column(name = "product_quantity")
     private int productQuantity;
 
-    @Column(name = "Unit Price", nullable = false, unique = false)
+    @Column(name = "product_unit_price")
     private double productUnitPrice;
 
-    @Column(name = "Preview", nullable = true, unique = false)
+    @Column(name = "product_picture")
     private Blob productPicture;
 
-    @ManyToOne(fetch = FetchType.EAGER) // exception to lazy loading
-    @Column(name = "Category Id", nullable = false, unique = false)
-    private int Categories_id;
+    // Foreign key excepted from lazy loading
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Categories_id")
+    private Categories Categories;
+    // Reference to Categories table entity insied Categories class
 
     public Products() {
     }
     // Empty constructor
 
     public Products(int id, String productName, String productDescription, int productQuantity, double productUnitPrice,
-            Blob productPicture, int categories_id) {
+            Blob productPicture, Categories Categories) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
         this.productPicture = productPicture;
-        this.Categories_id = categories_id;
+        this.Categories = Categories;
     }
 
     public int getId() {
@@ -101,12 +106,12 @@ public class Products {
         this.productPicture = productPicture;
     }
 
-    public int getCategories_id() {
-        return this.Categories_id;
+    public Categories getCategories() {
+        return this.Categories;
     }
 
-    public void setCategories_id(int Categories_id) {
-        this.Categories_id = Categories_id;
+    public void setCategories(Categories Categories) {
+        this.Categories = Categories;
     }
 
 }

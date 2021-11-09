@@ -1,5 +1,6 @@
-package com.example.spring256market.models;
+package com.example.spring256market.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,36 +13,37 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Users")
-public class Users {
+@Table(name = "users")
+// Allow serialization
+public class Users implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "User Id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "Role", nullable = false)
+    @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
     // is_admin=true for administrator user, false for regular users
 
-    @Column(name = "Username", nullable = false, unique = true)
+    @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "Email", nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Password", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "First name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "Paternal last name", nullable = false)
+    @Column(name = "last_name_p")
     private String lastNameP;
 
-    @Column(name = "Maternal last name", nullable = true)
+    @Column(name = "last_name_m")
     private String lastNameM;
 
-    @Column(name = "Creation date", nullable = false)
+    @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     Date creationDate;
 
