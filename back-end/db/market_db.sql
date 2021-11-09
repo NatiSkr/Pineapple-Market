@@ -28,27 +28,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `market`.`Products`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Products` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(100) NOT NULL,
-  `productDescription` VARCHAR(200) NOT NULL,
-  `productQuantity` INT NOT NULL,
-  `productUnitPrice` DOUBLE NOT NULL,
-  `productPicture` BLOB NULL,
-  `Categories_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Products_Categories_idx` (`Categories_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_Categories`
-    FOREIGN KEY (`Categories_id`)
-    REFERENCES `market`.`Categories` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `market`.`Users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `market`.`Users` (
@@ -66,38 +45,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `market`.`Orders`
+-- Table `market`.`Products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Orders` (
+CREATE TABLE IF NOT EXISTS `market`.`Products` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `productName` VARCHAR(100) NOT NULL,
+  `productDescription` VARCHAR(200) NOT NULL,
+  `productQuantity` INT NOT NULL,
+  `productUnitPrice` DOUBLE NOT NULL,
+  `productPicture` BLOB NULL,
+  `Categories_id` INT NOT NULL,
   `Users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Orders_Users1_idx` (`Users_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Orders_Users1`
-    FOREIGN KEY (`Users_id`)
-    REFERENCES `market`.`Users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `market`.`Products_has_Orders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Products_has_Orders` (
-  `Products_id` INT NOT NULL,
-  `Orders_id` INT NOT NULL,
-  PRIMARY KEY (`Products_id`, `Orders_id`),
-  INDEX `fk_Products_has_Orders_Orders1_idx` (`Orders_id` ASC) VISIBLE,
-  INDEX `fk_Products_has_Orders_Products1_idx` (`Products_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_has_Orders_Products1`
-    FOREIGN KEY (`Products_id`)
-    REFERENCES `market`.`Products` (`id`)
+  INDEX `fk_Products_Categories_idx` (`Categories_id` ASC) VISIBLE,
+  INDEX `fk_Products_Users1_idx` (`Users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Products_Categories`
+    FOREIGN KEY (`Categories_id`)
+    REFERENCES `market`.`Categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Products_has_Orders_Orders1`
-    FOREIGN KEY (`Orders_id`)
-    REFERENCES `market`.`Orders` (`id`)
+  CONSTRAINT `fk_Products_Users1`
+    FOREIGN KEY (`Users_id`)
+    REFERENCES `market`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
