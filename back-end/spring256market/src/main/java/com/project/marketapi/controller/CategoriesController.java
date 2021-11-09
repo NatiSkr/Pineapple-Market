@@ -1,12 +1,12 @@
-package com.example.spring256market.controller;
+package com.project.marketapi.controller;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
-import com.example.spring256market.model.Categories;
-import com.example.spring256market.payload.CategoriesRequest;
-import com.example.spring256market.services.CategoriesService;
+import com.project.marketapi.model.Categories;
+import com.project.marketapi.payload.CategoriesRequest;
+import com.project.marketapi.services.CategoriesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api") // handle only /api requests
+@RequestMapping(value="/api") // handle only /api requests
 
 public class CategoriesController {
 
@@ -30,31 +30,31 @@ public class CategoriesController {
     private CategoriesService categoriesService;
 
     // LIST
-    @GetMapping("/categories")
+    @GetMapping(value="/categories/all")
     public ResponseEntity<List<Categories>> listCategories(){
         return categoriesService.listCategories();
     }
 
     // CREATE
-    @PostMapping("/categories")
+    @PostMapping(value="/categories")
     public ResponseEntity<Categories> createCategories(@Valid @RequestBody CategoriesRequest newCategoriesRequest) {
         return categoriesService.createCategories(newCategoriesRequest);
     }
     
     // READ
-    @GetMapping("/categories/{id}")
+    @GetMapping(value="/categories/{id}")
     public ResponseEntity<Categories> readCategories(@PathVariable("id")int id) {
         return categoriesService.readCategories(id);
     }
 
     // UPDATE
-    @PutMapping("/categories/{id}")
+    @PutMapping(value="/categories/{id}")
     public ResponseEntity<Categories> updateCategories(@PathVariable("id") int id, @RequestBody CategoriesRequest newCategoriesRequest) {
         return categoriesService.updateCategories(id, newCategoriesRequest);
     }
 
     // DELETE
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping(value="/categories/{id}")
     public ResponseEntity<Categories> deleteCategories(@PathVariable("id") int id) {
         return categoriesService.deleteCategories(id);
     }

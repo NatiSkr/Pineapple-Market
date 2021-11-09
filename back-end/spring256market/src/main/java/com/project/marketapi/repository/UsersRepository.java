@@ -1,6 +1,6 @@
-package com.example.spring256market.repository;
+package com.project.marketapi.repository;
 
-import com.example.spring256market.model.Users;
+import com.project.marketapi.model.Users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

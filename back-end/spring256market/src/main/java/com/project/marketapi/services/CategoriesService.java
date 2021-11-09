@@ -1,9 +1,10 @@
-package com.example.spring256market.services;
+package com.project.marketapi.services;
 
 import java.util.List;
 
-import com.example.spring256market.model.Categories;
-import com.example.spring256market.payload.CategoriesRequest;
+import com.project.marketapi.model.Categories;
+import com.project.marketapi.payload.CategoriesRequest;
+
 import org.springframework.http.ResponseEntity;
 
 

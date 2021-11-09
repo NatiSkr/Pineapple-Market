@@ -1,4 +1,4 @@
-package com.example.spring256market.payload;
+package com.project.marketapi.payload;
 
 import lombok.Data;
 

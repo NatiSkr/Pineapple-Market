@@ -1,12 +1,12 @@
-package com.example.spring256market.services.impl;
+package com.project.marketapi.services.impl;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.spring256market.model.Categories;
-import com.example.spring256market.payload.CategoriesRequest;
-import com.example.spring256market.repository.CategoriesRepository;
-import com.example.spring256market.services.CategoriesService;
+import com.project.marketapi.model.Categories;
+import com.project.marketapi.payload.CategoriesRequest;
+import com.project.marketapi.repository.CategoriesRepository;
+import com.project.marketapi.services.CategoriesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

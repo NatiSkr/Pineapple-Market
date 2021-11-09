@@ -1,4 +1,4 @@
-package com.example.spring256market.model;
+package com.project.marketapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
