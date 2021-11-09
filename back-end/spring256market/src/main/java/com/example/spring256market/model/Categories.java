@@ -1,4 +1,6 @@
-package com.example.spring256market.models;
+package com.example.spring256market.model;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,14 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Categories")
-public class Categories {
+@Table(name = "categories")
+// Allow serialization
+public class Categories implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Category Id", nullable = false, unique = true)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "Category name", nullable = false, unique = true)
+    @Column(name = "category_name")
     private String categoryName;
 
     public Categories() {
