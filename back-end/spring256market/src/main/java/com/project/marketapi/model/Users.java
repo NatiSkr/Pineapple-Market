@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "users")
+@Table(name = "userst")
 // Allow serialization
 public class Users implements Serializable{
     @Id
@@ -25,14 +25,11 @@ public class Users implements Serializable{
     private boolean isAdmin;
     // is_admin=true for administrator user, false for regular users
 
-    @Column(name = "user_name")
-    private String userName;
-
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "pass_word")
+    private String passWord;
 
     @Column(name = "first_name")
     private String firstName;
@@ -44,20 +41,19 @@ public class Users implements Serializable{
     private String lastNameM;
 
     @Column(name = "creation_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     Date creationDate;
 
     public Users() {
     }
     // Empty constructor
 
-    public Users(int id, boolean isAdmin, String userName, String email, String password, String firstName,
+    public Users(int id, boolean isAdmin, String email, String passWord, String firstName,
             String lastNameP, String lastNameM, Date creationDate) {
         this.id = id;
         this.isAdmin = isAdmin;
-        this.userName = userName;
         this.email = email;
-        this.password = password;
+        this.passWord = passWord;
         this.firstName = firstName;
         this.lastNameP = lastNameP;
         this.lastNameM = lastNameM;
@@ -88,14 +84,6 @@ public class Users implements Serializable{
         this.isAdmin = isAdmin;
     }
 
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -104,13 +92,13 @@ public class Users implements Serializable{
         this.email = email;
     }
 
-    public String getPassword() {
-        return this.password;
+    public String getPassWord() {
+        return this.passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }    
 
     public String getFirstName() {
         return this.firstName;

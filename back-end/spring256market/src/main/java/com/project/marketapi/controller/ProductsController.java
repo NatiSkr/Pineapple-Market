@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/api") // handle only /api requests
+@RequestMapping(value="/api") // handle only /api requests
 
 public class ProductsController {
 

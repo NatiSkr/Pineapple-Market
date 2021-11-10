@@ -38,9 +38,8 @@ public class UsersImpl implements UsersService{
     public ResponseEntity<Users> createUsers(UsersRequest newUsersRequest) {
         Users user = new Users();
         user.setIsAdmin(newUsersRequest.getIsAdmin());
-        user.setUserName(newUsersRequest.getUserName());
         user.setEmail(newUsersRequest.getEmail());
-        user.setPassword(newUsersRequest.getPassword());
+        user.setPassWord(newUsersRequest.getPassWord());
         user.setFirstName(newUsersRequest.getFirstName());
         user.setLastNameP(newUsersRequest.getLastNameP());
         user.setLastNameM(newUsersRequest.getLastNameM());
@@ -63,7 +62,11 @@ public class UsersImpl implements UsersService{
         if (user.isPresent()){
             Users _user = user.get();
             _user.setIsAdmin(newUsersRequest.getIsAdmin());
-            _user.setUserName(newUsersRequest.getUserName());
+            _user.setEmail(newUsersRequest.getEmail());
+            _user.setPassWord(newUsersRequest.getPassWord());
+            _user.setFirstName(newUsersRequest.getFirstName());
+            _user.setLastNameP(newUsersRequest.getLastNameP());
+            _user.setLastNameM(newUsersRequest.getLastNameM());
             Users updatedProduct = usersRepository.save(_user);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }

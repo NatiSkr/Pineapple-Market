@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "products")
+@Table(name = "productst")
 // Allow serialization
 public class Products implements Serializable{
     @Id
@@ -37,25 +37,31 @@ public class Products implements Serializable{
     @Column(name = "product_picture")
     private Blob productPicture;
 
-    // Foreign key excepted from lazy loading
+    // Foreign keys excepted from lazy loading
+    // @JoinColumn(name="foreign key name")
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Categories_id")
-    private Categories Categories;
-    // Reference to Categories table entity insied Categories class
+    private Categories categories;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Users_id")
+    private Users users;
 
     public Products() {
     }
     // Empty constructor
 
     public Products(int id, String productName, String productDescription, int productQuantity, double productUnitPrice,
-            Blob productPicture, Categories Categories) {
+            Blob productPicture, Categories categories, Users users) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
         this.productPicture = productPicture;
-        this.Categories = Categories;
+        this.categories = categories;
+        this.users = users;
     }
 
     public int getId() {
@@ -107,11 +113,19 @@ public class Products implements Serializable{
     }
 
     public Categories getCategories() {
-        return this.Categories;
+        return this.categories;
     }
 
-    public void setCategories(Categories Categories) {
-        this.Categories = Categories;
+    public void setCategories(Categories categories) {
+        this.categories = categories;
     }
 
+    public Users getUsers() {
+        return this.users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+    
 }

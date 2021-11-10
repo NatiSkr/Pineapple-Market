@@ -6,20 +6,18 @@ import lombok.Data;
 public class UsersRequest {
     // Atributes
     private boolean isAdmin;
-    private String userName;
     private String email;
-    private String password;
+    private String passWord;
     private String firstName;
     private String lastNameP;
     private String lastNameM;
 
     // Constructor , Getters and Setters
 
-    public UsersRequest(boolean isAdmin, String userName, String email, String password, String firstName, String lastNameP, String lastNameM) {
+    public UsersRequest(boolean isAdmin, String email, String passWord, String firstName, String lastNameP, String lastNameM) {
         this.isAdmin = isAdmin;
-        this.userName = userName;
         this.email = email;
-        this.password = password;
+        this.passWord = passWord;
         this.firstName = firstName;
         this.lastNameP = lastNameP;
         this.lastNameM = lastNameM;
@@ -37,14 +35,6 @@ public class UsersRequest {
         this.isAdmin = isAdmin;
     }
 
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -53,12 +43,12 @@ public class UsersRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return this.password;
+    public String getPassWord() {
+        return this.passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getFirstName() {

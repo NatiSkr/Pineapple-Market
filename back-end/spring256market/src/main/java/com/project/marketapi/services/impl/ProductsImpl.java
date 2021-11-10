@@ -41,6 +41,8 @@ public class ProductsImpl implements ProductsService {
         product.setProductDescription(newProductsRequest.getProductName());
         product.setProductQuantity(newProductsRequest.getProductQuantity());
         product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
+        product.setCategories(newProductsRequest.getCategories());
+        product.setUsers(newProductsRequest.getUsers());
         Products newProducts = productsRepository.save(product);
         return new ResponseEntity<>(newProducts, HttpStatus.CREATED);
     }
@@ -63,6 +65,8 @@ public class ProductsImpl implements ProductsService {
             _product.setProductDescription(newProductsRequest.getProductName());
             _product.setProductQuantity(newProductsRequest.getProductQuantity());
             _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
+            _product.setCategories(newProductsRequest.getCategories());
+            _product.setUsers(newProductsRequest.getUsers());
             Products updatedProduct = productsRepository.save(_product);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }
