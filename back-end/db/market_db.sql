@@ -101,19 +101,22 @@ CREATE TABLE IF NOT EXISTS `market`.`orders` (
   `product_quantity` INT NOT NULL,
   `product_unit_price` DOUBLE NOT NULL,
   `product_picture` BLOB NULL,
-  `Categories_id` INT NOT NULL,
-  `Users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
+<<<<<<< HEAD
+  CONSTRAINT `fk_Products_categories`
+    FOREIGN KEY (`id`)
+=======
 <<<<<<< HEAD
   INDEX `fk_Products_Categories_idx` (`Categories_id` ASC) VISIBLE,
   INDEX `fk_Products_Users1_idx` (`Users_id` ASC) VISIBLE,
   CONSTRAINT `fk_Products_Categories`
     FOREIGN KEY (`Categories_id`)
+>>>>>>> main
     REFERENCES `market`.`categoriest` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Products_Users1`
-    FOREIGN KEY (`Users_id`)
+  CONSTRAINT `fk_Products_users`
+    FOREIGN KEY (`id`)
     REFERENCES `market`.`userst` (`id`)
 =======
   INDEX `fk_Orders_Users1_idx` (`Users_id` ASC) VISIBLE,
