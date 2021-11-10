@@ -18,7 +18,7 @@ import javax.persistence.Table;
 // Allow serialization
 public class Products implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -41,11 +41,11 @@ public class Products implements Serializable{
     // @JoinColumn(name="foreign key name")
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Categories_id")
+    @JoinColumn(name = "categories_id")
     private Categories categories;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Users_id")
+    @JoinColumn(name = "users_id")
     private Users users;
 
     public Products() {
