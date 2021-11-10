@@ -18,86 +18,54 @@ CREATE SCHEMA IF NOT EXISTS `market` DEFAULT CHARACTER SET utf8 ;
 USE `market` ;
 
 -- -----------------------------------------------------
--- Table `market`.`Categories`
+-- Table `market`.`categoriest`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Categories` (
+CREATE TABLE IF NOT EXISTS `market`.`categoriest` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `categoryName` VARCHAR(45) NOT NULL,
+  `category_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `market`.`Products`
+-- Table `market`.`userst`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Products` (
+CREATE TABLE IF NOT EXISTS `market`.`userst` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(100) NOT NULL,
-  `productDescription` VARCHAR(200) NOT NULL,
-  `productQuantity` INT NOT NULL,
-  `productUnitPrice` DOUBLE NOT NULL,
-  `productPicture` BLOB NULL,
-  `Categories_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Products_Categories_idx` (`Categories_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_Categories`
-    FOREIGN KEY (`Categories_id`)
-    REFERENCES `market`.`Categories` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `market`.`Users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `isAdmin` TINYINT NOT NULL DEFAULT 0,
-  `userName` VARCHAR(45) NOT NULL,
+  `is_admin` TINYINT NOT NULL DEFAULT 0,
   `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(200) NOT NULL,
-  `firstName` VARCHAR(45) NOT NULL,
-  `lastNameP` VARCHAR(45) NOT NULL,
-  `lastNameM` VARCHAR(45) NOT NULL,
-  `creationDate` DATETIME NOT NULL,
+  `pass_word` VARCHAR(200) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name_p` VARCHAR(45) NOT NULL,
+  `last_name_m` VARCHAR(45) NULL DEFAULT 'no maternal last name',
+  `creation_date` DATE NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `market`.`Orders`
+-- Table `market`.`productst`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Orders` (
+CREATE TABLE IF NOT EXISTS `market`.`productst` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `product_name` VARCHAR(100) NOT NULL,
+  `product_description` VARCHAR(200) NOT NULL,
+  `product_quantity` INT NOT NULL,
+  `product_unit_price` DOUBLE NOT NULL,
+  `product_picture` BLOB NULL,
+  `Categories_id` INT NOT NULL,
   `Users_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Orders_Users1_idx` (`Users_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Orders_Users1`
-    FOREIGN KEY (`Users_id`)
-    REFERENCES `market`.`Users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `market`.`Products_has_Orders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`Products_has_Orders` (
-  `Products_id` INT NOT NULL,
-  `Orders_id` INT NOT NULL,
-  PRIMARY KEY (`Products_id`, `Orders_id`),
-  INDEX `fk_Products_has_Orders_Orders1_idx` (`Orders_id` ASC) VISIBLE,
-  INDEX `fk_Products_has_Orders_Products1_idx` (`Products_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Products_has_Orders_Products1`
-    FOREIGN KEY (`Products_id`)
-    REFERENCES `market`.`Products` (`id`)
+  INDEX `fk_Products_Categories_idx` (`Categories_id` ASC) VISIBLE,
+  INDEX `fk_Products_Users1_idx` (`Users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Products_Categories`
+    FOREIGN KEY (`Categories_id`)
+    REFERENCES `market`.`categoriest` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Products_has_Orders_Orders1`
-    FOREIGN KEY (`Orders_id`)
-    REFERENCES `market`.`Orders` (`id`)
+  CONSTRAINT `fk_Products_Users1`
+    FOREIGN KEY (`Users_id`)
+    REFERENCES `market`.`userst` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
