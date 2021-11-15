@@ -42,7 +42,7 @@ public class Users implements Serializable{
 
     @Column(name = "creation_date")
     @Temporal(TemporalType.DATE)
-    Date creationDate;
+    private Date creationDate;
 
     public Users() {
     }
