@@ -1,5 +1,6 @@
 package com.project.marketapi.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,10 +12,16 @@ import com.project.marketapi.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersImpl implements UsersService{
+public class UsersImpl implements UsersService, UserDetailsService{
 
     @Autowired
     private UsersRepository usersRepository;
@@ -82,6 +89,24 @@ public class UsersImpl implements UsersService{
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    // Override userDetails method
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Users user = usersRepository.findByEmail(email);
+
+        List<GrantedAuthority> roles = new ArrayList<>();
+        if (user.getIsAdmin()==true) {
+            roles.add(new SimpleGrantedAuthority("ADMIN"));
+        }
+        else {
+            roles.add(new SimpleGrantedAuthority("REGULAR"));
+        }
+
+        UserDetails userDet = new User(user.getEmail(), user.getPassWord(), roles);
+
+        return userDet;
     }
     
 }
