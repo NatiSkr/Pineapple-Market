@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "productst")
+@Table(name = "products")
 // Allow serialization
 public class Products implements Serializable{
     @Id
@@ -45,15 +45,15 @@ public class Products implements Serializable{
     private Categories categories;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "users_id")
-    private Users users;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Products() {
     }
     // Empty constructor
 
     public Products(int id, String productName, String productDescription, int productQuantity, double productUnitPrice,
-            Blob productPicture, Categories categories, Users users) {
+            Blob productPicture, Categories categories, User user) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -61,7 +61,7 @@ public class Products implements Serializable{
         this.productUnitPrice = productUnitPrice;
         this.productPicture = productPicture;
         this.categories = categories;
-        this.users = users;
+        this.user = user;
     }
 
     public int getId() {
@@ -120,12 +120,12 @@ public class Products implements Serializable{
         this.categories = categories;
     }
 
-    public Users getUsers() {
-        return this.users;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
     
 }

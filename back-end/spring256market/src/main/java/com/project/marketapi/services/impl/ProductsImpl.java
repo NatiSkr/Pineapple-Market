@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.project.marketapi.model.Products;
-import com.project.marketapi.payload.ProductsRequest;
+import com.project.marketapi.payload.request.ProductsRequest;
 import com.project.marketapi.repository.ProductsRepository;
 import com.project.marketapi.services.ProductsService;
 
@@ -42,7 +42,7 @@ public class ProductsImpl implements ProductsService {
         product.setProductQuantity(newProductsRequest.getProductQuantity());
         product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
         product.setCategories(newProductsRequest.getCategories());
-        product.setUsers(newProductsRequest.getUsers());
+        product.setUser(newProductsRequest.getUser());
         Products newProducts = productsRepository.save(product);
         return new ResponseEntity<>(newProducts, HttpStatus.CREATED);
     }
@@ -66,7 +66,7 @@ public class ProductsImpl implements ProductsService {
             _product.setProductQuantity(newProductsRequest.getProductQuantity());
             _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
             _product.setCategories(newProductsRequest.getCategories());
-            _product.setUsers(newProductsRequest.getUsers());
+            _product.setUser(newProductsRequest.getUser());
             Products updatedProduct = productsRepository.save(_product);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }

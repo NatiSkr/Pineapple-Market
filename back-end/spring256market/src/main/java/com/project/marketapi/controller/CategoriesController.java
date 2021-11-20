@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.project.marketapi.model.Categories;
-import com.project.marketapi.payload.CategoriesRequest;
+import com.project.marketapi.payload.request.CategoriesRequest;
 import com.project.marketapi.services.CategoriesService;
 
 import org.springframework.beans.factory.annotation.Autowired;

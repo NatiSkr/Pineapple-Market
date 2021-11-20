@@ -3,7 +3,7 @@ package com.project.marketapi.services;
 import java.util.List;
 
 import com.project.marketapi.model.Categories;
-import com.project.marketapi.payload.CategoriesRequest;
+import com.project.marketapi.payload.request.CategoriesRequest;
 
 import org.springframework.http.ResponseEntity;
 

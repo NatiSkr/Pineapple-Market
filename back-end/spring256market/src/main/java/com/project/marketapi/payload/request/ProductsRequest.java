@@ -1,7 +1,7 @@
-package com.project.marketapi.payload;
+package com.project.marketapi.payload.request;
 
 import com.project.marketapi.model.Categories;
-import com.project.marketapi.model.Users;
+import com.project.marketapi.model.User;
 
 import lombok.Data;
 
@@ -13,17 +13,17 @@ public class ProductsRequest {
     private int productQuantity;
     private double productUnitPrice;
     private Categories categories;
-    private Users users;
+    private User user;
     // Pending preview image
 
     // Filled constructors & Getters and Setters
-    public ProductsRequest(String productName, String productDescription, int productQuantity, double productUnitPrice, Categories categories, Users users) {
+    public ProductsRequest(String productName, String productDescription, int productQuantity, double productUnitPrice, Categories categories, User user) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
         this.categories = categories;
-        this.users = users;
+        this.user = user;
     }
     
     public String getProductName() {
@@ -66,12 +66,12 @@ public class ProductsRequest {
         this.categories = categories;
     }
 
-    public Users getUsers() {
-        return this.users;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

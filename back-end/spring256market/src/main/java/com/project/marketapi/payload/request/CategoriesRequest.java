@@ -1,4 +1,4 @@
-package com.project.marketapi.payload;
+package com.project.marketapi.payload.request;
 
 import lombok.Data;
 
