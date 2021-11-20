@@ -24,12 +24,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `market`.`userst`
+-- Table `market`.`usert`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `market`.`userst` (
+CREATE TABLE IF NOT EXISTS `market`.`usert` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `is_admin` TINYINT NOT NULL DEFAULT 0,
-  `email` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
   `pass_word` VARCHAR(200) NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name_p` VARCHAR(45) NOT NULL,
@@ -55,9 +55,9 @@ CREATE TABLE IF NOT EXISTS `market`.`productst` (
     REFERENCES `market`.`categoriest` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Products_users`
+  CONSTRAINT `fk_Products_user`
     FOREIGN KEY (`id`)
-    REFERENCES `market`.`userst` (`id`)
+    REFERENCES `market`.`usert` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
