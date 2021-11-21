@@ -39,11 +39,15 @@ Json Content (Body) =
 "productDescription":"sold by kg. Imported from Ecuador",
 "productQuantity":20,
 "productUnitPrice":150,
-"categories":1,
-"user":1
+"categories":{"id":1},
+"user":{"id":1} }
 }
 
 Product Id is automatically generated
+
+#### Products: read / search specific item
+
+GET Request at /api/products/Bananas
 
 #### Users: update user information [admin only]
 

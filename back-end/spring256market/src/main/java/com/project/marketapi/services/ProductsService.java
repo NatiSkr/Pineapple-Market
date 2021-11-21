@@ -14,7 +14,7 @@ public interface ProductsService {
 
     // CRUD
     ResponseEntity<Products> createProducts(ProductsRequest newProductsRequest);
-    ResponseEntity<Products> readProducts(int id);
+    ResponseEntity<Products> readProducts(String productName);
     ResponseEntity<Products> updateProducts(int id, ProductsRequest newProductsRequest);
     ResponseEntity<Products> deleteProducts(int id);
 }

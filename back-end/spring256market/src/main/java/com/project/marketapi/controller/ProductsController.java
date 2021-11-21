@@ -43,10 +43,10 @@ public class ProductsController {
    }
    
    // READ
-   @GetMapping(value="/products/{id}")
+   @GetMapping(value="/products/{productName}")
    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-   public ResponseEntity<Products> readProducts(@PathVariable("id")int id) {
-       return productsService.readProducts(id);
+   public ResponseEntity<Products> readProducts(@PathVariable("productName")String productName) {
+       return productsService.readProducts(productName);
    }
 
    // UPDATE

@@ -38,7 +38,7 @@ public class ProductsImpl implements ProductsService {
     public ResponseEntity<Products> createProducts(ProductsRequest newProductsRequest) {
         Products product = new Products();
         product.setProductName(newProductsRequest.getProductName());
-        product.setProductDescription(newProductsRequest.getProductName());
+        product.setProductDescription(newProductsRequest.getProductDescription());
         product.setProductQuantity(newProductsRequest.getProductQuantity());
         product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
         product.setCategories(newProductsRequest.getCategories());
@@ -49,8 +49,8 @@ public class ProductsImpl implements ProductsService {
 
     // READ
     @Override
-    public ResponseEntity<Products> readProducts(int id) {
-        Optional<Products> product = productsRepository.findById(id);
+    public ResponseEntity<Products> readProducts(String productName) {
+        Optional<Products> product = productsRepository.findByProductName(productName);
         return product.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -67,7 +67,7 @@ public class ProductsImpl implements ProductsService {
                 _product.setProductName(newProductsRequest.getProductName());
             }
             if (newProductsRequest.getProductName() != null) {
-                _product.setProductDescription(newProductsRequest.getProductName());
+                _product.setProductDescription(newProductsRequest.getProductDescription());
             }
             if (newProductsRequest.getProductQuantity() != 0) {
                 _product.setProductQuantity(newProductsRequest.getProductQuantity());
