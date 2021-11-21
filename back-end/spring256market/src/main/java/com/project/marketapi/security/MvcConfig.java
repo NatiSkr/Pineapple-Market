@@ -1,4 +1,4 @@
-package com.project.marketapi.securingweb;
+package com.project.marketapi.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

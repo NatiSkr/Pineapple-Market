@@ -1,5 +1,6 @@
 package com.project.marketapi.services.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class UserImpl implements UserCRUDService{
         user.setFirstName(newUserRequest.getFirstName());
         user.setLastNameP(newUserRequest.getLastNameP());
         user.setLastNameM(newUserRequest.getLastNameM());
+        user.setCreationDate(new Date());
         User newUser = userRepository.save(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
@@ -60,11 +62,25 @@ public class UserImpl implements UserCRUDService{
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()){
             User _user = user.get();
-            _user.setUsername(newUserRequest.getUsername());
-            _user.setPassword(newUserRequest.getPassword());
-            _user.setFirstName(newUserRequest.getFirstName());
-            _user.setLastNameP(newUserRequest.getLastNameP());
-            _user.setLastNameM(newUserRequest.getLastNameM());
+
+            // Check that request body fields are filled. If null do nothing (otherwise replaces field wth NULL)
+            if (newUserRequest.getUsername() != null) {
+                _user.setUsername(newUserRequest.getUsername());
+            }
+            if (newUserRequest.getPassword() != null) {
+                _user.setPassword(newUserRequest.getPassword());
+            }
+            if (newUserRequest.getFirstName() != null) {
+                _user.setFirstName(newUserRequest.getFirstName());
+            }
+            if (newUserRequest.getLastNameP() != null) {
+                _user.setLastNameP(newUserRequest.getLastNameP());
+            }
+            if (newUserRequest.getLastNameM() != null) {
+                _user.setLastNameM(newUserRequest.getLastNameM());
+            }
+            _user.setCreationDate(new Date());
+            
             User updatedProduct = userRepository.save(_user);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }

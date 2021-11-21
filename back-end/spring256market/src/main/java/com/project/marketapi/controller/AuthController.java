@@ -89,7 +89,13 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    /*
+                    Beware! the switch statement comparison is case sentitive
+                    Be very very sure about how you declared the role string,
+                    otherwise new user becomes default case
+                    You can check this comparing role_id in the 'user_role' table with 'roles' table
+                    */
+                    case "ADMIN":
                         Role adminRole = roleService.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: No se encuentra dicho Rol."));
                         roles.add(adminRole);

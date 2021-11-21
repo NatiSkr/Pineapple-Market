@@ -37,7 +37,12 @@ public class CategoriesImpl implements CategoriesService{
     @Override
     public ResponseEntity<Categories> createCategories(CategoriesRequest newCategoriesRequest) {
         Categories category = new Categories();
-        category.setCategoryName(newCategoriesRequest.getCategoryName());
+        // Check that request body is filled. If null do nothing (otherwise replaces field wth NULL)
+        // May seem redundant, but we consider a case where an accidental empty request is sent
+        if (newCategoriesRequest.getCategoryName() != null) {
+           category.setCategoryName(newCategoriesRequest.getCategoryName()); 
+        }
+        
         Categories newCategories = categoriesRepository.save(category);
         return new ResponseEntity<>(newCategories, HttpStatus.CREATED);
     }  

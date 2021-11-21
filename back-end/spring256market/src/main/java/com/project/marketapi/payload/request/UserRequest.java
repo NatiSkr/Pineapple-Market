@@ -1,5 +1,7 @@
 package com.project.marketapi.payload.request;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,15 +12,17 @@ public class UserRequest {
     private String firstName;
     private String lastNameP;
     private String lastNameM;
+    private Date creationDate;
 
     // Constructor , Getters and Setters
 
-    public UserRequest(String username, String password, String firstName, String lastNameP, String lastNameM) {
+    public UserRequest(String username, String password, String firstName, String lastNameP, String lastNameM, Date creationDate) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastNameP = lastNameP;
         this.lastNameM = lastNameM;
+        this.creationDate = creationDate;
     }
 
     public String getUsername() {
@@ -59,6 +63,15 @@ public class UserRequest {
 
     public void setLastNameM(String lastNameM) {
         this.lastNameM = lastNameM;
+    }
+
+
+    public Date getCreationDate() {
+        return this.creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
 }

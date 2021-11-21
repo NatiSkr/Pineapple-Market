@@ -61,12 +61,27 @@ public class ProductsImpl implements ProductsService {
         Optional<Products> product = productsRepository.findById(id);
         if (product.isPresent()){
             Products _product = product.get();
-            _product.setProductName(newProductsRequest.getProductName());
-            _product.setProductDescription(newProductsRequest.getProductName());
-            _product.setProductQuantity(newProductsRequest.getProductQuantity());
-            _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
-            _product.setCategories(newProductsRequest.getCategories());
-            _product.setUser(newProductsRequest.getUser());
+
+            // Check that request body fields are filled. If null do nothing (otherwise replaces field wth NULL)
+            if (newProductsRequest.getProductName() != null) {
+                _product.setProductName(newProductsRequest.getProductName());
+            }
+            if (newProductsRequest.getProductName() != null) {
+                _product.setProductDescription(newProductsRequest.getProductName());
+            }
+            if (newProductsRequest.getProductQuantity() != 0) {
+                _product.setProductQuantity(newProductsRequest.getProductQuantity());
+            }
+            if (newProductsRequest.getProductUnitPrice() != 0) {
+                _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
+            }
+            if (newProductsRequest.getCategories() != null) {
+               _product.setCategories(newProductsRequest.getCategories()); 
+            }
+            if (newProductsRequest.getUser() != null) {
+                _product.setUser(newProductsRequest.getUser());
+            }
+            
             Products updatedProduct = productsRepository.save(_product);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }

@@ -10,6 +10,7 @@ import com.project.marketapi.services.UserCRUDService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,30 +33,35 @@ public class UserController {
 
     // LIST
     @GetMapping(value="/user/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<User>> listUser(){
         return userCRUDService.listUser();
     }
 
    // CREATE
    @PostMapping(value="/user")
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
    public ResponseEntity<User> createUser(@Valid @RequestBody UserRequest newUserRequest) {
        return userCRUDService.createUser(newUserRequest);
    }
    
    // READ
    @GetMapping(value="/user/{id}")
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
    public ResponseEntity<User> readUser(@PathVariable("id")int id) {
        return userCRUDService.readUser(id);
    }
 
    // UPDATE
    @PutMapping(value="/user/{id}")
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
    public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestBody UserRequest newUserRequest) {
        return userCRUDService.updateUser(id, newUserRequest);
    }
 
    // DELETE
    @DeleteMapping(value="/user/{id}")
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
    public ResponseEntity<User> deleteUser(@PathVariable("id") int id) {
        return userCRUDService.deleteUser(id);
    }

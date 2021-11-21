@@ -56,16 +56,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
+                // Disable csrf to test API, enable at deployment
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+
+                // Order of antMatchers matters. Go from specific to general
+                .authorizeRequests()
+
+                // Creation requests
+                .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/**")
-                .hasAnyRole("ADMIN","USER")
-                .antMatchers(HttpMethod.PUT,"/api/**")
-                .hasAnyRole("ADMIN","USER")
+                
+                .antMatchers(HttpMethod.POST,"/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/products/**").hasRole("ADMIN")
+                
+                // Read requests
+                .antMatchers(HttpMethod.GET,"/api/categories/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/products/**").hasAnyRole("ADMIN", "USER")
+
+                // Update requests
+                .antMatchers(HttpMethod.PUT,"/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/api/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/api/products/**").hasRole("ADMIN")
+
+                // Delete requests
+                .antMatchers(HttpMethod.DELETE,"/api/categories/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/products/**").hasRole("ADMIN")
+                
+                // AUTHORIZE ALL OTHER GET REQUESTS CASES
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

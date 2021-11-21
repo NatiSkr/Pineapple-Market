@@ -37,18 +37,32 @@ public class User implements Serializable{
     @Column(name = "creation_date")
     @Temporal(TemporalType.DATE)
     Date creationDate;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+    /*
+    FetchType.LAZY updates row correctly BUT throws error 500: internal server error.
+    Fixed with EAGER fetching
+    (not a good idea if we have too many users and roles but we assume few people will use this app)
 
+    In order to scale the app for bigger customers this should get fixed with @Transactional at service
+
+    Check this related question at stack overflow
+    https://stackoverflow.com/questions/11746499/how-to-solve-the-failed-to-lazily-initialize-a-collection-of-role-hibernate-ex
+
+    */
+
+    // Empty constructor
     public User() {
     }
-    // Empty constructor
+    
 
     // Short and suber basic constructor, otherwise current AuthController breaks
+    // Add additional information with PUT request
+    // or update relevant methods to pass information when creating user at AuthController and services
     public User(String username, String password) {
         this.username = username;
         this.password = password;

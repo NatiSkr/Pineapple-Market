@@ -16,6 +16,10 @@ public class ProductsRequest {
     private User user;
     // Pending preview image
 
+    // Filled constructor, gettters and setters
+    public ProductsRequest() {
+    }
+
     // Filled constructors & Getters and Setters
     public ProductsRequest(String productName, String productDescription, int productQuantity, double productUnitPrice, Categories categories, User user) {
         this.productName = productName;
