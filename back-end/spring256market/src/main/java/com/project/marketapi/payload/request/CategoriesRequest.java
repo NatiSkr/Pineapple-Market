@@ -1,4 +1,4 @@
-package com.project.marketapi.payload;
+package com.project.marketapi.payload.request;
 
 import lombok.Data;
 
@@ -7,6 +7,11 @@ public class CategoriesRequest {
     // Attributes
     private String categoryName;
 
+    // Empty constructor for deserialisation
+    public CategoriesRequest() {
+    }
+
+    // Filled constructor, gettters and setters
     public CategoriesRequest(String categoryName) {
         this.categoryName = categoryName;
     }

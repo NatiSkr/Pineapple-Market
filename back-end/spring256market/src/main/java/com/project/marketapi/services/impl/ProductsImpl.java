@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.project.marketapi.model.Products;
-import com.project.marketapi.payload.ProductsRequest;
+import com.project.marketapi.payload.request.ProductsRequest;
 import com.project.marketapi.repository.ProductsRepository;
 import com.project.marketapi.services.ProductsService;
 
@@ -42,7 +42,7 @@ public class ProductsImpl implements ProductsService {
         product.setProductQuantity(newProductsRequest.getProductQuantity());
         product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
         product.setCategories(newProductsRequest.getCategories());
-        product.setUsers(newProductsRequest.getUsers());
+        product.setUser(newProductsRequest.getUser());
         Products newProducts = productsRepository.save(product);
         return new ResponseEntity<>(newProducts, HttpStatus.CREATED);
     }
@@ -61,12 +61,27 @@ public class ProductsImpl implements ProductsService {
         Optional<Products> product = productsRepository.findById(id);
         if (product.isPresent()){
             Products _product = product.get();
-            _product.setProductName(newProductsRequest.getProductName());
-            _product.setProductDescription(newProductsRequest.getProductName());
-            _product.setProductQuantity(newProductsRequest.getProductQuantity());
-            _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
-            _product.setCategories(newProductsRequest.getCategories());
-            _product.setUsers(newProductsRequest.getUsers());
+
+            // Check that request body fields are filled. If null do nothing (otherwise replaces field wth NULL)
+            if (newProductsRequest.getProductName() != null) {
+                _product.setProductName(newProductsRequest.getProductName());
+            }
+            if (newProductsRequest.getProductName() != null) {
+                _product.setProductDescription(newProductsRequest.getProductName());
+            }
+            if (newProductsRequest.getProductQuantity() != 0) {
+                _product.setProductQuantity(newProductsRequest.getProductQuantity());
+            }
+            if (newProductsRequest.getProductUnitPrice() != 0) {
+                _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
+            }
+            if (newProductsRequest.getCategories() != null) {
+               _product.setCategories(newProductsRequest.getCategories()); 
+            }
+            if (newProductsRequest.getUser() != null) {
+                _product.setUser(newProductsRequest.getUser());
+            }
+            
             Products updatedProduct = productsRepository.save(_product);
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
         }

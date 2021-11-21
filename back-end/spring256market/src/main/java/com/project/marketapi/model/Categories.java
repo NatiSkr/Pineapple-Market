@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoriest")
+@Table(name = "categories")
 // Allow serialization
 public class Categories implements Serializable {
     @Id

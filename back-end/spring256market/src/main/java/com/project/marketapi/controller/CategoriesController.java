@@ -5,11 +5,12 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.project.marketapi.model.Categories;
-import com.project.marketapi.payload.CategoriesRequest;
+import com.project.marketapi.payload.request.CategoriesRequest;
 import com.project.marketapi.services.CategoriesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,30 +30,35 @@ public class CategoriesController {
 
     // LIST
     @GetMapping(value="/categories/all")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<List<Categories>> listCategories(){
         return categoriesService.listCategories();
     }
 
     // CREATE
     @PostMapping(value="/categories")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Categories> createCategories(@Valid @RequestBody CategoriesRequest newCategoriesRequest) {
         return categoriesService.createCategories(newCategoriesRequest);
     }
     
     // READ
     @GetMapping(value="/categories/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<Categories> readCategories(@PathVariable("id")int id) {
         return categoriesService.readCategories(id);
     }
 
     // UPDATE
     @PutMapping(value="/categories/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Categories> updateCategories(@PathVariable("id") int id, @RequestBody CategoriesRequest newCategoriesRequest) {
         return categoriesService.updateCategories(id, newCategoriesRequest);
     }
 
     // DELETE
     @DeleteMapping(value="/categories/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Categories> deleteCategories(@PathVariable("id") int id) {
         return categoriesService.deleteCategories(id);
     }

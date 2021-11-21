@@ -2,7 +2,7 @@
 
 ## History
 
-* Added letter 't' at end of the table's name to avoid use of restricted words of MySQL, Java or Spring dependencies (especially with users)
+* Added letter 't' at end of the table's name to avoid use of restricted words of MySQL, Java or Spring dependencies (especially with user)
 
 * Column password is now pass_word to avoid reserved keyword. Aditionally, replaces namesakes in java with pass_word or pass_Word.
 
@@ -18,7 +18,7 @@
 
 Caused by password or user with special characters or uppercase letters. Recommend changing to a lowercase-only 
 password to connect to server from root user, or create a new user. Do either from the MySQL Workbench: 
-go to Server -> Users and privileges and apply changes. Then go to <application.properties> file and update username and password
+go to Server -> User and privileges and apply changes. Then go to <application.properties> file and update username and password
 
 - Cannot destructor property 'name' of 'undefined' as it is undefined
 

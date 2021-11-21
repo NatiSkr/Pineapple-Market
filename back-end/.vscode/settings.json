@@ -13,5 +13,6 @@
             "name": "Market",
             "username": "root"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
