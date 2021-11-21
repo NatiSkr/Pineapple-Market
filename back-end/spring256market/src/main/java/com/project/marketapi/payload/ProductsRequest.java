@@ -5,6 +5,7 @@ import com.project.marketapi.model.Users;
 
 import lombok.Data;
 
+
 @Data
 public class ProductsRequest {
     // Atributes to get from table
