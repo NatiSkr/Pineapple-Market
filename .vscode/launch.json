@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Spring256marketApplication<spring256market>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.project.marketapi.Spring256marketApplication",
+            "projectName": "spring256market",
+            "args": ""
+        }
+    ]
+}
