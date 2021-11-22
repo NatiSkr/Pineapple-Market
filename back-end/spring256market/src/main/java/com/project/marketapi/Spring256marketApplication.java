@@ -26,6 +26,7 @@ public class Spring256marketApplication {
 		SpringApplication.run(Spring256marketApplication.class, args);
 	}
 
+	// Preload roles
 	@Component
 	public class PostConstructExampleBean {
 
