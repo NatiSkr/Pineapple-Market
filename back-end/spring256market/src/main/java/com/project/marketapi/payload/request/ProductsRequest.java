@@ -1,8 +1,5 @@
 package com.project.marketapi.payload.request;
 
-import com.project.marketapi.model.Categories;
-import com.project.marketapi.model.User;
-
 import lombok.Data;
 
 
@@ -13,8 +10,8 @@ public class ProductsRequest {
     private String productDescription;
     private int productQuantity;
     private double productUnitPrice;
-    private Categories categories;
-    private User user;
+    private int categoryId;
+    private int userId;
     // Pending preview image
 
     // Filled constructor, gettters and setters
@@ -22,13 +19,14 @@ public class ProductsRequest {
     }
 
     // Filled constructors & Getters and Setters
-    public ProductsRequest(String productName, String productDescription, int productQuantity, double productUnitPrice, Categories categories, User user) {
+    public ProductsRequest(String productName, String productDescription, int productQuantity, double productUnitPrice, 
+    int categoryId, int userId) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
-        this.categories = categories;
-        this.user = user;
+        this.categoryId = categoryId;
+        this.userId = userId;
     }
     
     public String getProductName() {
@@ -63,21 +61,19 @@ public class ProductsRequest {
         this.productUnitPrice = productUnitPrice;
     }
 
-    public Categories getCategories() {
-        return this.categories;
+    public int getCategoryId() {
+        return this.categoryId;
     }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public User getUser() {
-        return this.user;
+    public int getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-
-
 }

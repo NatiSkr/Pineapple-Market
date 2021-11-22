@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "products")
@@ -22,7 +25,7 @@ public class Products implements Serializable{
     @Column(name = "id")
     private int id;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", unique = true)
     private String productName;
 
     @Column(name = "product_description")
@@ -38,30 +41,41 @@ public class Products implements Serializable{
     private Blob productPicture;
 
     // Foreign keys excepted from lazy loading
-    // @JoinColumn(name="foreign key name")
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categories_id")
+    // For category id, work only with id (int), not whole model
+    @JoinColumn(name="category", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = Categories.class, fetch = FetchType.EAGER)
+    @NotNull(message = "specified category not set")
+    @JsonIgnore
     private Categories categories;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @Column(name = "category")
+    private int categoryId;
+
+    // For user id, work only with id (int), not whole model
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @NotNull(message = "specified user not set")
+    @JsonIgnore
     private User user;
+
+    @Column(name="user_id")
+    private int userId;
 
     public Products() {
     }
     // Empty constructor
 
     public Products(int id, String productName, String productDescription, int productQuantity, double productUnitPrice,
-            Blob productPicture, Categories categories, User user) {
+            Blob productPicture,int categoryId, int userId) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
         this.productUnitPrice = productUnitPrice;
         this.productPicture = productPicture;
-        this.categories = categories;
-        this.user = user;
+        this.categoryId = categoryId;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -112,20 +126,20 @@ public class Products implements Serializable{
         this.productPicture = productPicture;
     }
 
-    public Categories getCategories() {
-        return this.categories;
+    public int getCategoryId() {
+        return this.categoryId;
     }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public User getUser() {
-        return this.user;
+    public int getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
 }

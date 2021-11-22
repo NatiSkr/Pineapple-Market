@@ -41,10 +41,10 @@ public class ProductsImpl implements ProductsService {
         product.setProductDescription(newProductsRequest.getProductDescription());
         product.setProductQuantity(newProductsRequest.getProductQuantity());
         product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
-        product.setCategories(newProductsRequest.getCategories());
-        product.setUser(newProductsRequest.getUser());
+        product.setCategoryId(newProductsRequest.getCategoryId());
+        product.setUserId(newProductsRequest.getUserId());
         Products newProducts = productsRepository.save(product);
-        return new ResponseEntity<>(newProducts, HttpStatus.CREATED);
+        return new ResponseEntity<>(newProducts, HttpStatus.CREATED);        
     }
 
     // READ
@@ -75,11 +75,11 @@ public class ProductsImpl implements ProductsService {
             if (newProductsRequest.getProductUnitPrice() != 0) {
                 _product.setProductUnitPrice(newProductsRequest.getProductUnitPrice());
             }
-            if (newProductsRequest.getCategories() != null) {
-               _product.setCategories(newProductsRequest.getCategories()); 
+            if (newProductsRequest.getCategoryId() != 0) {
+               _product.setCategoryId(newProductsRequest.getCategoryId()); 
             }
-            if (newProductsRequest.getUser() != null) {
-                _product.setUser(newProductsRequest.getUser());
+            if (newProductsRequest.getUserId() != 0) {
+                _product.setUserId(newProductsRequest.getUserId());
             }
             
             Products updatedProduct = productsRepository.save(_product);
