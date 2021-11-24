@@ -59,12 +59,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Disable csrf to test API, enable at deployment
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
+                
                 // Order of antMatchers matters. Go from specific to general
                 .authorizeRequests()
 
                 // Creation requests
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**").anonymous()
                 .antMatchers("/api/test/**").permitAll()
                 
                 .antMatchers(HttpMethod.POST,"/api/categories/**").hasRole("ADMIN")
@@ -88,6 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // AUTHORIZE ALL OTHER GET REQUESTS CASES
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated();
+                
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
